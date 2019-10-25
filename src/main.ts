@@ -1,61 +1,65 @@
-import * as PIXI from "pixi.js";
+import * as PIXI from 'pixi.js';
+import { Game } from './screens/game/game.screen';
 
 export class Main {
-    private static readonly GAME_WIDTH = 800;
-    private static readonly GAME_HEIGHT = 600;
-    private game: PIXI.Application;
+  private static readonly GAME_WIDTH = 800;
+  private static readonly GAME_HEIGHT = 600;
+  private app: PIXI.Application;
+  private game: Game;
+  private loader: PIXI.Loader;
 
-    constructor() {
-        window.onload = () => {
-            this.startLoadingAssets();
-        };
-    }
+  constructor() {
+    window.onload = () => {
+      this.startLoadingAssets();
+    };
+  }
 
-    private startLoadingAssets(): void {
-        const loader = PIXI.Loader.shared;
-        loader.add("rabbit", "assets/images/rabbitv3.png");
-        loader.on("complete", () => {
-            this.onAssetsLoaded();
-        });
-        loader.load();
-    }
+  private startLoadingAssets(): void {
+    this.loader = PIXI.Loader.shared;
+    this.loader.add('dude', 'assets/images/spritesheets/run/run.json');
+    this.loader.add('env', 'assets/images/spritesheets/env/env.json')
+    this.loader.on('complete', () => {
+      this.onAssetsLoaded();
+    });
+    this.loader.load();
+  }
 
-    private onAssetsLoaded(): void {
-        this.createRenderer();
+  private onAssetsLoaded(): void {
+    this.createApp();
+    this.createGame();
+    this.resize();
+  }
 
-        const stage = this.game.stage;
+  private createGame(): void {
+    this.game = new Game(this.app);
+    this.app.stage.addChild(this.game);
+  }
 
-        const bunny = new PIXI.Sprite(PIXI.Texture.from("rabbit"));
-        bunny.anchor.set(0.5, 0.5);
-        bunny.x = Main.GAME_WIDTH / 2;
-        bunny.y = Main.GAME_HEIGHT / 2;
-        bunny.scale.set(2, 2);
-        stage.addChild(bunny);
+  private createApp(): void {
+    this.app = new PIXI.Application({
+      backgroundColor: 0x00002a,
+      width: Main.GAME_WIDTH,
+      height: Main.GAME_HEIGHT
+    });
 
-        this.game.ticker.add(() => {
-            bunny.rotation += 0.05;
-        });
-    }   
+    document.body.appendChild(this.app.view);
 
-    private createRenderer(): void {
-        this.game = new PIXI.Application({
-            backgroundColor: 0xffff00,
-            width: Main.GAME_WIDTH,
-            height: Main.GAME_HEIGHT
-        });
 
-        document.body.appendChild(this.game.view);
+    window.addEventListener('resize', () => {
+      this.resize();
+    });
+  }
 
-        this.game.renderer.resize(window.innerWidth, window.innerHeight);
-        this.game.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
-        this.game.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
-
-        window.addEventListener("resize", () => {
-            this.game.renderer.resize(window.innerWidth, window.innerHeight);
-            this.game.stage.scale.x = window.innerWidth / Main.GAME_WIDTH;
-            this.game.stage.scale.y = window.innerHeight / Main.GAME_HEIGHT;
-        });
-    }
+  //TODO: Scaling, according to window's inner size
+  private resize = (): void => {
+      this.game.onResize(Main.GAME_WIDTH, Main.GAME_HEIGHT);
+    // this.app.renderer.resize(Math.min(Main.GAME_WIDTH, window.innerWidth), Math.min(Main.GAME_HEIGHT, window.innerHeight));
+    // const scaleX = window.innerWidth / Main.GAME_WIDTH;
+    // const scaleY = window.innerHeight / Main.GAME_HEIGHT;
+    // console.log(scaleX, scaleY);
+    // this.app.stage.scale.x = Math.min(scaleX, scaleY);
+    // this.app.stage.scale.y = Math.min(scaleX, scaleY);
+  }
 }
 
 const game: Main = new Main();
