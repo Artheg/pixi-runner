@@ -1,7 +1,7 @@
 import { Container, Sprite, Loader, Point } from 'pixi.js';
-import BaseEnvManager from './base.env.manager';
+import BaseEnvPartController from './base.env.controller';
 
-export default class CloudManager extends BaseEnvManager {
+export default class CloudController extends BaseEnvPartController {
   private clouds: Sprite[] = [];
   constructor(parent: Container) {
     super(parent);

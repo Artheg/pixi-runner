@@ -1,5 +1,5 @@
 import { Container, Loader, AnimatedSprite} from 'pixi.js';
-import { GameObject } from './screens/game/base/gameobject';
+import { GameObject } from './game/base/gameobject';
 
 export class Player extends GameObject {
   constructor() {

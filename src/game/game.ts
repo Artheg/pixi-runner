@@ -6,32 +6,27 @@ import {
   Application,
   Point
 } from 'pixi.js';
-import { Player } from '../../player';
-import EnvManager from './managers/environment/env.manager';
+import { Player } from '../player';
+import EnvController from './screens/game/environment/env.controller';
 import { PhysicsManager } from './managers/physics.manager';
+import { ScreenManager } from './managers/screen.manager';
 
-export class Game extends Container {
+export class Game {
   private player: Player;
 
   private appWidth: number;
   private appHeight: number;
 
-  private envManager: EnvManager;
+  private screenManager: ScreenManager;
+  private envManager: EnvController;
   private physicsManager: PhysicsManager;
 
   constructor(private app: Application) {
-    super();
-    this.player = new Player();
-    this.player.x = 40;
-    this.envManager = new EnvManager(this);
+    this.screenManager = new ScreenManager(app);
+    this.screenManager.switchScreen('GAME');
     this.physicsManager = new PhysicsManager();
-
-    this.addChild(this.player);
-
-    this.physicsManager.addObject(this.player);
-
     this.app.ticker.add(() => {
-      this.envManager.update();
+      this.screenManager.update();
       this.physicsManager.update();
     });
   }
@@ -39,9 +34,6 @@ export class Game extends Container {
   public onResize(appWidth: number, appHeight: number) {
     this.appWidth = appWidth;
     this.appHeight = appHeight;
-
-    this.envManager.onResize(appWidth, appHeight);
-
-    this.player.y = appHeight - 600;
+    this.screenManager.onResize(appWidth, appHeight);
   }
 }

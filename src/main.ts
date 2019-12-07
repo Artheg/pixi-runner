@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { Game } from './screens/game/game.screen';
+import { Game } from './game/game';
 
 export class Main {
   private static readonly GAME_WIDTH = 800;
@@ -32,7 +32,7 @@ export class Main {
 
   private createGame(): void {
     this.game = new Game(this.app);
-    this.app.stage.addChild(this.game);
+    // this.app.stage.addChild(this.game);
   }
 
   private createApp(): void {

@@ -1,6 +1,6 @@
 import { Container } from "pixi.js";
 
-export default class BaseEnvManager {
+export default class BaseEnvPartController {
     protected container: Container;
     protected appWidth: number;
     protected appHeight: number;

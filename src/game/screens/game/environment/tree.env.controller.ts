@@ -1,7 +1,7 @@
 import { Container, Loader, Sprite, Point } from 'pixi.js';
-import BaseEnvManager from './base.env.manager';
+import BaseEnvPartController from './base.env.controller';
 
-export default class TreeManager extends BaseEnvManager {
+export default class TreeController extends BaseEnvPartController {
   private tree: Sprite;
   constructor(parent: Container) {
     super(parent);

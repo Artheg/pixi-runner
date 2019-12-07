@@ -1,7 +1,7 @@
-import BaseEnvManager from './base.env.manager';
+import BaseEnvPartController from './base.env.controller';
 import { Container, Loader, Sprite } from 'pixi.js';
 
-export default class GroundManager extends BaseEnvManager {
+export default class GroundController extends BaseEnvPartController {
   private ground: Sprite[] = [];
   constructor(parent: Container) {
     super(parent);

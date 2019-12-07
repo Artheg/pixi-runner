@@ -1,5 +1,5 @@
 import { GameObject } from '../base/gameobject';
-import { GeomUtil } from '../../util/geom.util';
+import { GeomUtil } from '../util/geom.util';
 import { COPYFILE_FICLONE } from 'constants';
 
 export class PhysicsManager {
