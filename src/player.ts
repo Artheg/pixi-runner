@@ -17,6 +17,6 @@ export class Player extends GameObject {
   }
 
   public get weight() {
-    return 25;
+    return 0;
   }
 }

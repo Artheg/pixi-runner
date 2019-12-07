@@ -32,7 +32,7 @@ export class Game extends Container {
 
     this.app.ticker.add(() => {
       this.envManager.update();
-      this.physicsManager.update();      
+      this.physicsManager.update();
     });
   }
 
