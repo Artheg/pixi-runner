@@ -1,9 +1,9 @@
 import { Container, Loader, AnimatedSprite} from 'pixi.js';
-import { GameObject } from './game/base/gameobject';
+import { GameObject } from '../../base/gameobject';
 
 export class Player extends GameObject {
+
   constructor() {
-    
     const container = new Container();
     const sheet = Loader.shared.resources['dude'].spritesheet;
     const dudeSprite = new AnimatedSprite(

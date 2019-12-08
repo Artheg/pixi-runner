@@ -1,6 +1,6 @@
 import { BaseScreen } from "../base.screen";
 import EnvController from "./environment/env.controller";
-import { Player } from "../../../player";
+import { Player } from "./player";
 
 export class GameScreen extends BaseScreen {
     private envController: EnvController;
@@ -13,6 +13,7 @@ export class GameScreen extends BaseScreen {
         this.player = new Player();
         this.addChild(this.player);
         this.player.x = 40;
+        this.player.y = 470;
     }
 
     public update() {

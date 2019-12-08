@@ -1,24 +1,15 @@
 import {
-  Container,
-  Texture,
-  Sprite,
-  Loader,
-  Application,
-  Point
+  Application
 } from 'pixi.js';
-import { Player } from '../player';
-import EnvController from './screens/game/environment/env.controller';
 import { PhysicsManager } from './managers/physics.manager';
 import { ScreenManager } from './managers/screen.manager';
 
 export class Game {
-  private player: Player;
 
   private appWidth: number;
   private appHeight: number;
 
   private screenManager: ScreenManager;
-  private envManager: EnvController;
   private physicsManager: PhysicsManager;
 
   constructor(private app: Application) {
