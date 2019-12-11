@@ -1,6 +1,5 @@
 import { GameObject } from '../base/gameobject';
 import { GeomUtil } from '../util/geom.util';
-import { COPYFILE_FICLONE } from 'constants';
 
 export class PhysicsManager {
   private objects: GameObject[] = [];
@@ -15,25 +14,34 @@ export class PhysicsManager {
     console.log(this.objects.length);
     for (let i = 0; i < this.objects.length; i++) {
       const a = this.objects[i];
-      this.applyGravity(a);
+      let needToApplyGravity = true;
+      // this.applyGravity(a);
       for (let j = 0; j < this.objects.length; j++) {
         const b = this.objects[j];
         if (a === b) {
-            continue;
+          continue;
         }
         const intersects = GeomUtil.boundsIntersect(a.collider, b.collider);
-        if (intersects) {
-          a.onCollision(b);
-          b.onCollision(a);
+        // if (intersects) {
+        //   a.onCollision(b);
+        //   b.onCollision(a);
+        // }
+        if (
+          !intersects.aAboveB &&
+          !intersects.aLeftOfB &&
+          !intersects.aRightOfB &&
+          a.weight > 0
+        ) {
+          needToApplyGravity = false;
         }
-        if (a.collider.bottom == b.collider.top) {
-            this.applyGravity(a);
-        }
+      }
+      if (needToApplyGravity) {
+        this.applyGravity(a);
       }
     }
   };
 
-  private applyGravity = (a: GameObject,) => {
-    a.y += (this.gravity * a.weight);
-  }
+  private applyGravity = (a: GameObject) => {
+    a.y += this.gravity * a.weight;
+  };
 }

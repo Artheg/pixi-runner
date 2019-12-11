@@ -3,6 +3,8 @@ import { GameObject } from '../../base/gameobject';
 
 export class Player extends GameObject {
 
+  private playerWeight: number;
+
   constructor() {
     const container = new Container();
     const sheet = Loader.shared.resources['dude'].spritesheet;
@@ -14,9 +16,17 @@ export class Player extends GameObject {
       // dudeSprite.scale.set(2, 2);
       container.addChild(dudeSprite);
       super(container);
+      this.playerWeight = 25;
+
+  }
+
+
+  public onCollision (other: GameObject) {
+    console.log("ON COLLISION");
+    this.playerWeight = 0;
   }
 
   public get weight() {
-    return 0;
+    return this.playerWeight;
   }
 }

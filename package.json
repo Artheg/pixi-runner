@@ -14,7 +14,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "pixi.js": "^5.0.3"
+        "inversify": "^5.0.1",
+        "pixi.js": "^5.0.3",
+        "reflect-metadata": "^0.1.13"
     },
     "browserslist": "> 0.25%, not dead",
     "devDependencies": {

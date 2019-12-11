@@ -1,14 +1,15 @@
 import BaseEnvPartController from './base.env.controller';
 import { Container, Loader, Sprite } from 'pixi.js';
+import { Ground } from './ground';
 
 export default class GroundController extends BaseEnvPartController {
-  private ground: Sprite[] = [];
+  private ground: Ground[] = [];
   constructor(parent: Container) {
     super(parent);
-    const texture = Loader.shared.resources['env'].textures['tile_2.png'];
+    
     this.ground = [];
     for (let i = 0; i < 7; i++) {
-      const g = new Sprite(texture);
+      const g = new Ground();
       this.container.addChild(g);
       g.x = (g.width - 25) * i;
       this.ground.push(g);

@@ -13,7 +13,7 @@ export class GameScreen extends BaseScreen {
         this.player = new Player();
         this.addChild(this.player);
         this.player.x = 40;
-        this.player.y = 470;
+        this.player.y = 100;
     }
 
     public update() {
