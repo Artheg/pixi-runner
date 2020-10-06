@@ -18,7 +18,7 @@ export class Main {
     this.loader = PIXI.Loader.shared;
     this.loader.add('dude', 'assets/images/spritesheets/run/run.json');
     this.loader.add('env', 'assets/images/spritesheets/env/env.json')
-    this.loader.on('complete', () => {
+    this.loader.onComplete.add(() => {
       this.onAssetsLoaded();
     });
     this.loader.load();
